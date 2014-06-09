@@ -1,3 +1,14 @@
+#install package if missing
+required_package <- 'Biostrings'
+my_check <- required_package %in% installed.packages()[,"Package"]
+if(!my_check){
+   source("http://bioconductor.org/biocLite.R")
+   biocLite("Biostrings")
+}
+
+#load package
+library(Biostrings)
+
 #human dinucleotide probabilities
 #AA       AC       AG       AT       CA       CC       CG       CT
 #4.945086 4.534408 8.181527 4.506151 6.518094 6.606635 2.505510 7.970537
@@ -52,4 +63,19 @@ generatemarkovseq <- function(transitionmatrix, initialprobs, seqlength){
 }
 
 myinitialprobs <- c(27.92863, 21.83863, 13.84794, 36.38479)
-generatemarkovseq(mytransitionmatrix, myinitialprobs, 22)
+
+my_number <- 1000000
+
+for(my_size in 15:30){
+	my_outfile <- paste('my_random_seq_', my_size, '.fa', sep='')
+
+   my_random_seq <- array()
+   for(i in 1:my_number){
+      my_random_seq[i] <- generatemarkovseq(mytransitionmatrix, myinitialprobs, my_size)
+   }
+
+   my_random_seq <- DNAStringSet(my_random_seq)
+   names(my_random_seq) <- 1:my_number
+   writeXStringSet(my_random_seq, my_outfile, format="fasta")
+
+}
