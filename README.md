@@ -7,4 +7,4 @@ Obtain the dinucleotide frequencies
 
 Generate random sequence using dinucleotide frequencies
 
-`time R --no-save < seq_by_markov_chain.R`
+`seq_by_markov_chain.R 22`
