@@ -7,4 +7,4 @@ bibtex $file
 latex $file
 pdflatex $file
 
-rm $file.blg $file.bbl $file.dvi $file.aux $file.log $file.out
+rm -rf $file.blg $file.bbl $file.dvi $file.aux $file.log $file.out
