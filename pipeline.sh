@@ -8,7 +8,9 @@ zcat mature.fa.gz | perl -nle 'if (/^>/){print} else { s/U/T/g; print }' | gzip 
 
 for i in {15..30}
    do seq_by_markov_chain.R $i
-	seq_by_equal.R $i
+   seq_by_equal.R $i
+	seq_by_gen_freq.R $i
+   random_seq.pl 1000000 $i
 done
 
 wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
