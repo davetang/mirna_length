@@ -33,3 +33,23 @@ for file in `ls my_random*.fa`;
    samtools sort $base.bam ${base}_sorted
    rm $base.sam $base.bam $base.sai
 done
+
+#summaries
+#perfectly mapped sequences for equal probability of nucleotides
+for file in `ls my_random_seq_equal_*sorted.bam`; do echo $file; bam_stat.pl $file | grep "^0"; done
+
+#perfectly mapped sequences for genome matched probabilities of nucleotides
+for file in `ls my_random_seq_gen_freq_*_sorted.bam`; do echo $file; bam_stat.pl $file | grep "^0"; done
+
+#perfectly mapped sequences for Markov chain generated sequences
+for file in `ls my_random_seq_[1-3][0-9]_sorted.bam`; do echo $file; bam_stat.pl $file | grep "^0"; done
+
+#mapped sequences for equal probability of nucleotides
+for file in `ls my_random_seq_equal_*sorted.bam`; do echo $file; bam_stat.pl $file | grep ^Mapped: | cut -f2 -d' '; done
+
+#mapped sequences for genome matched probabilities of nucleotides
+for file in `ls my_random_seq_gen_freq_*_sorted.bam`; do echo $file; bam_stat.pl $file | grep ^Mapped: | cut -f2 -d' '; done
+
+#mapped sequences for Markov chain generated sequences
+for file in `ls my_random_seq_[1-3][0-9]_sorted.bam`; do echo $file; bam_stat.pl $file | grep ^Mapped: | cut -f2 -d' '; done
+
