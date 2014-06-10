@@ -26,17 +26,17 @@
 \maketitle
 
 \begin{abstract}
-MicroRNAs (miRNAs) blah blah
+Despite their size, microRNAs (miRNAs) can have dramatic effects on human health due to their direct effect on transcripts. The misregulation of miRNAs can cause a wide spectrum of diseases, such as cancer, and as such they are under heavily investigation.
 
 \end{abstract}
 
 \section{Introduction}
 
-MicroRNAs were discovered in 1993\cite{pmid8252621}.
+MicroRNAs (miRNAs) were discovered in 1993\cite{pmid8252621} and are the most well known class of non-coding RNAs (ncRNAs).
 
 \section{Methods and results}\label{method_and_result}
 
-All code underlying this work is available at \url{https://github.com/davetang/mirna_length}.
+All code underlying this work is available at \url{https://github.com/davetang/mirna_length}. Briefly, random sequences were generated using R (version 3.1.0) and the R Bioconductor package Biostrings\cite{biostrings_package}. We generated three sets of one million random sequences that ranged from 15 to 30 base pairs in length, totalling 16 million sequences. The first two sets of sequences were generated based on the multinomial sequence model where each nucleotide in the sequence is independent and identically distributed. The first set of randomly generated sequences used an equal probability for each nucleotide ($p_{a} = 0.25$, $p_{c} = 0.25$, $p_{g} = 0.25$, $p_{t} = 0.25$). The second set used probabilities based on the what was observed in the human genome (hg38): $p_{a} = 0.29$, $p_{c} = 0.20$, $p_{g} = 0.21$, $p_{t} = 0.30$. The last set of randomly generated sequences used a Markov chain model, where the next sequence depends on the previous sequence. Transitions probabilities (see figure ~\ref{fig:transition}) were derived on dinucleotide frequencies of mature human miRNAs that were downloaded from miRBase\cite{pmid21037258}. The probability of the first base was derived from the frequency of nucleotides at the first base of the human mature miRNAs. The alignment of the sequences were performed using BWA\cite{pmid19451168} (version 0.7.9a-r786) using aln/samse and summaries were created using Perl scripts.
 
 \begin{figure}[h]
    \centering
