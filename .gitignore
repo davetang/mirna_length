@@ -2,3 +2,6 @@
 *.fa
 hg38.*
 *.bam
+mouse
+celegans
+zebrafish

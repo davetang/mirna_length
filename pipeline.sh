@@ -6,6 +6,39 @@ wget ftp://mirbase.org/pub/mirbase/CURRENT/mature.fa.gz
 
 zcat mature.fa.gz | perl -nle 'if (/^>/){print} else { s/U/T/g; print }' | gzip > mature_thymine.fa.gz
 
+#download genomes
+#human
+wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
+gunzip hg38.fa.gz
+#mouse
+mkdir mouse
+cd mouse
+wget http://hgdownload.cse.ucsc.edu/goldenPath/mm10/bigZips/mm10.2bit
+twoBitToFa mm10.2bit mm10.fa
+#zebrafish
+mkdir zebrafish
+cd zebrafish
+wget http://hgdownload.cse.ucsc.edu/goldenPath/danRer7/bigZips/danRer7.fa.gz
+gunzip danRer7.fa.gz
+#celegans
+mkdir celegans
+cd celegans/
+wget http://hgdownload.cse.ucsc.edu/goldenPath/ce10/bigZips/ce10.2bit
+twoBitToFa ce10.2bit ce10.fa
+
+#download BWA
+wget http://sourceforge.net/projects/bio-bwa/files/bwa-0.7.9a.tar.bz2
+tar -xjf bwa-0.7.9a.tar.bz2
+cd bwa-0.7.9a/
+make
+
+#index genomes
+bwa index danRer7.fa
+bwa index ce10.fa
+bwa index hg38.fa
+bwa index mm10.fa
+
+#generate random sequences
 for i in {15..30}
    do seq_by_markov_chain.R $i
    seq_by_equal.R $i
@@ -13,17 +46,7 @@ for i in {15..30}
    random_seq.pl 1000000 $i
 done
 
-wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
-
-gunzip hg38.fa.gz
-
-wget http://sourceforge.net/projects/bio-bwa/files/bwa-0.7.9a.tar.bz2
-tar -xjf bwa-0.7.9a.tar.bz2
-cd bwa-0.7.9a/
-make
-
-bwa index hg38.fa
-
+#align random sequences
 for file in `ls my_random*.fa`;
    do echo $file;
    base=`basename $file .fa`
