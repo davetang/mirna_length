@@ -1,6 +1,14 @@
 README
 -----------------------------
 
+### Clone this repository
+
+git clone https://github.com/davetang/mirna_length.git
+
+### Perform all analyses
+
+`pipeline.sh`
+
 ### Generate the transition matrices and first base frequencies
 
 `R --no-save < dinucleotide.R`
