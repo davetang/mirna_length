@@ -65,6 +65,16 @@ for org in hg38 mm10 ce10 danRer7
    done
 done
 
+#transition images
+Rscript image/transition.R ce10_trans_mat.Robject
+Rscript image/transition.R danRer7_trans_mat.Robject
+Rscript image/transition.R hg38_trans_mat.Robject
+Rscript image/transition.R mm10_trans_mat.Robject
+convert image/ce10.eps -trim +repage image/ce10.pdf
+convert image/danRer7.eps -trim +repage image/danRer7.pdf
+convert image/hg38.eps -trim +repage image/hg38.pdf
+convert image/mm10.eps -trim +repage image/mm10.pdf
+
 exit
 
 #summaries

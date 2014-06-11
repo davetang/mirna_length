@@ -52,10 +52,33 @@ The main function of miRNA is to target and suppress the translation of mRNA tra
 
 All code underlying this work is available at \url{https://github.com/davetang/mirna_length}. Briefly, random sequences were generated using R (version 3.1.0) and the R Bioconductor package Biostrings\cite{biostrings_package}. We generated three sets of one million random sequences that ranged from 15 to 30 base pairs in length, totalling 48 million sequences. The first two sets of sequences were generated based on the multinomial sequence model where each nucleotide in the sequence is independent and identically distributed based on a probability. The first set of randomly generated sequences used an equal probability for each nucleotide ($p_{a} = 0.25$, $p_{c} = 0.25$, $p_{g} = 0.25$, $p_{t} = 0.25$) and the second set used probabilities based on the nucleotide frequency observed in the human genome (hg38): $p_{a} = 0.29$, $p_{c} = 0.20$, $p_{g} = 0.21$, $p_{t} = 0.30$. The third set of randomly generated sequences used a Markov chain model, where the next sequence depends on the previous sequence. Transitions probabilities (Figure ~\ref{fig:transition}) were derived from the dinucleotide frequencies observed from a set of mature human miRNAs downloaded from miRBase\cite{pmid21037258}. The probability of the first base was derived from the frequency of nucleotides at the first base of human mature miRNAs. The alignment of the sequences was performed using BWA\cite{pmid19451168} (version 0.7.9a-r786) using aln/samse and summaries of the mapping were created using Perl scripts. The bar plots were created in R using ggplot2\cite{ggplot2_book} and reshape2\cite{reshape_wickham}.
 
-\begin{figure}[h]
+\begin{figure}
    \centering
-   \includegraphics[width=.8\textwidth,natwidth=3297,natheight=2227]{image/transition.png}
-   \caption{Transition diagram based on dinucleotide frequencies of miRBase human miRNAs.}
+   \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.7\textwidth,natwidth=100,natheight=100,angle=270]{hg38.pdf}
+      \caption{}
+      \label{fig:blah1}
+   \end{subfigure}%
+   \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.7\textwidth,natwidth=100,natheight=100,angle=270]{mm10.pdf}
+      \caption{}
+      \label{fig:blah2}
+   \end{subfigure}
+   \begin{subfigure}{.5\columnwidth}
+      \centering
+      \includegraphics[width=.7\textwidth,natwidth=100,natheight=100,angle=270]{danRer7.pdf}
+      \caption{}
+      \label{fig:blah3}
+   \end{subfigure}%
+   \begin{subfigure}{.5\columnwidth}
+      \centering
+      \includegraphics[width=.7\textwidth,natwidth=100,natheight=100,angle=270]{ce10.pdf}
+      \caption{}
+      \label{fig:blah4}
+   \end{subfigure}
+   \caption{Transition diagrams for (a) human, (b) mouse, (c) zebrafish, and (d) nematode based on dinucleotide frequencies from miRBase mature miRNAs.}
    \label{fig:transition}
 \end{figure}
 
@@ -71,7 +94,7 @@ The human genome is mainly composed of repetitive elements, many of which are tr
       \caption{}
       \label{fig:mapped}
    \end{subfigure}%
-      \begin{subfigure}{.5\textwidth}
+   \begin{subfigure}{.5\textwidth}
       \centering
       \includegraphics[width=\textwidth,natwidth=2345,natheight=1692]{perfectly_mapped.png}
       \caption{}

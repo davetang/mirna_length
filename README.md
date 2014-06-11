@@ -65,7 +65,11 @@ Other: 78088274
 
 ### Generate the transition matrices
 
-`Rscript image/transition.R ce10_trans_mat.Robject`
-`Rscript image/transition.R danRer7_trans_mat.Robject`
-`Rscript image/transition.R hg38_trans_mat.Robject`
-`Rscript image/transition.R mm10_trans_mat.Robject`
+`Rscript image/transition.R ce10_trans_mat.Robject`<br />
+`Rscript image/transition.R danRer7_trans_mat.Robject`<br />
+`Rscript image/transition.R hg38_trans_mat.Robject`<br />
+`Rscript image/transition.R mm10_trans_mat.Robject`<br />
+`epstopdf image/ce10.eps`<br />
+`epstopdf image/danRer7.eps`<br />
+`epstopdf image/hg38.eps`<br />
+`epstopdf image/mm10.eps`
