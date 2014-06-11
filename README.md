@@ -53,16 +53,19 @@ Other: 78088274
 
 ### Generate random sequence using genome nucleotide frequencies
 
-`seq_by_gen_freq.R 22 human_nuc_freq.Robject 1000000 human`
+`seq_by_gen_freq.R 22 hg38_nuc_freq.Robject 1000000 hg38`
 
 ### Generate random sequence using dinucleotide frequencies
 
-`seq_by_markov_chain.R 22 human_trans_mat.Robject human_init_prob.Robject 1000000 human`
+`seq_by_markov_chain.R 22 hg38_trans_mat.Robject hg38_init_prob.Robject 1000000 hg38`
 
 ### Generate random sequence using equal nucleotide frequencies
 
-`seq_by_equal.R 22 1000000 human`
+`seq_by_equal.R 22 1000000 hg38`
 
 ### Generate the transition matrices
 
-`image/transition.R human_trans_mat.Robject`
+`Rscript image/transition.R ce10_trans_mat.Robject`
+`Rscript image/transition.R danRer7_trans_mat.Robject`
+`Rscript image/transition.R hg38_trans_mat.Robject`
+`Rscript image/transition.R mm10_trans_mat.Robject`

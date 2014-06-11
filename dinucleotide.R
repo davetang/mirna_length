@@ -12,7 +12,7 @@ library(Biostrings)
 nucleotides <- c('A', 'C', 'G', 'T')
 
 #store fasta
-my_mirna <- readDNAStringSet('mature_thymine.fa.gz', 'fasta')
+my_mirna <- readDNAStringSet('mature_thymine.fa', 'fasta')
 
 #get dinucleotide frequencies
 di_freq <- dinucleotideFrequency(my_mirna)

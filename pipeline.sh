@@ -4,7 +4,7 @@
 #Mon Jun  9 14:33:00 JST 2014
 wget ftp://mirbase.org/pub/mirbase/CURRENT/mature.fa.gz
 
-zcat mature.fa.gz | perl -nle 'if (/^>/){print} else { s/U/T/g; print }' | gzip > mature_thymine.fa.gz
+zcat mature.fa.gz | perl -nle 'if (/^>/){print} else { s/U/T/g; print }' > mature_thymine.fa
 
 #download BWA
 wget http://sourceforge.net/projects/bio-bwa/files/bwa-0.7.9a.tar.bz2
@@ -46,9 +46,9 @@ R --no-save < genome_freq.R
 #generate random sequences
 for org in hg38 mm10 ce10 danRer7
    do for i in {15..30}
-      do seq_by_markov_chain.R $i ${org}_trans_mat.Robject ${org}_init_prob.Robject 20 $org
-      seq_by_equal.R $i 20 $org
-   	seq_by_gen_freq.R $i ${org}_nuc_freq.Robject 20 $org
+      do Rscript seq_by_markov_chain.R $i ${org}_trans_mat.Robject ${org}_init_prob.Robject 20 $org
+      Rscript seq_by_equal.R $i 20 $org
+      Rscript seq_by_gen_freq.R $i ${org}_nuc_freq.Robject 20 $org
    done
 done
 
