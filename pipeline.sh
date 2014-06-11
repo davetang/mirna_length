@@ -13,23 +13,26 @@ cd bwa-0.7.9a/
 make
 cd ..
 
+wget http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/twoBitToFa
+chmod 755 twoBitToFa
+
 #download genomes
 #human
 mkdir hg38
 wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz -O hg38/hg38.fa.gz
-gunzip human/hg38.fa.gz
+gunzip hg38/hg38.fa.gz
 #mouse
 mkdir mm10
 wget http://hgdownload.cse.ucsc.edu/goldenPath/mm10/bigZips/mm10.2bit -O mm10/mm10.2bit
-twoBitToFa mouse/mm10.2bit mouse/mm10.fa
+twoBitToFa mm10/mm10.2bit mm10/mm10.fa
 #zebrafish
 mkdir danRer7
 wget http://hgdownload.cse.ucsc.edu/goldenPath/danRer7/bigZips/danRer7.fa.gz -O danRer7/danRer7.fa.gz
-gunzip zebrafish/danRer7.fa.gz
+gunzip danRer7/danRer7.fa.gz
 #celegans
 mkdir ce10
 wget http://hgdownload.cse.ucsc.edu/goldenPath/ce10/bigZips/ce10.2bit -O ce10/ce10.2bit
-twoBitToFa celegans/ce10.2bit celegans/ce10.fa
+twoBitToFa ce10/ce10.2bit ce10/ce10.fa
 
 #index genomes
 bwa-0.7.9a/bwa index danRer7/danRer7.fa
