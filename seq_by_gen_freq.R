@@ -4,10 +4,14 @@
 args <- commandArgs(TRUE)
 #check for 1 arguments
 args_length <- length(args)
-if (args_length != 1){
-   stop("Requires size of fragment as input")
+if (args_length != 3){
+   stop("Requires size of fragment, genome frequency object as input, and directory to write files")
 }
 my_size <- args[1]
+my_freq <- args[2]
+my_dir <- args[3]
+
+load(my_freq)
 
 #install package if missing
 required_package <- 'Biostrings'
@@ -26,16 +30,6 @@ library(Biostrings)
 #define the alphabet of nucleotides
 nucleotides <- c('A', 'C', 'G', 'T')
 
-#frequency in hg38
-a <- 898285419
-c <- 623727342
-g <- 626335137
-t <- 900967885
-acgt <- sum(a, c, g, t)
-
-#set probabilities
-my_prob <- c(a*100/acgt, c*100/acgt, g*100/acgt, t*100/acgt)
-
 #generate a sequence
 #sample(nucleotides, my_size, rep=T, prob=my_prob)
 
@@ -46,7 +40,7 @@ gen_seq <- function(x){
 }
 
 my_number <- 1000000
-my_outfile <- paste('my_random_seq_gen_freq_', my_size, '.fa', sep='')
+my_outfile <- paste(my_dir, '/my_random_seq_gen_freq_', my_size, '.fa', sep='')
 my_random_seq <- sapply(1:my_number, gen_seq)
 my_random_seq <- DNAStringSet(my_random_seq)
 names(my_random_seq) <- 1:my_number

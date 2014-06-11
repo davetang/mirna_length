@@ -4,10 +4,11 @@
 args <- commandArgs(TRUE)
 #check for 1 arguments
 args_length <- length(args)
-if (args_length != 1){
-   stop("Requires size of fragment as input")
+if (args_length != 2){
+   stop("Requires size of fragment as input and directory to write files")
 }
 my_size <- args[1]
+my_dir <- args[2]
 
 #install package if missing
 required_package <- 'Biostrings'
@@ -39,7 +40,7 @@ gen_seq <- function(x){
 }
 
 my_number <- 1000000
-my_outfile <- paste('my_random_seq_equal_', my_size, '.fa', sep='')
+my_outfile <- paste(my_dir, '/my_random_seq_equal_', my_size, '.fa', sep='')
 my_random_seq <- sapply(1:my_number, gen_seq)
 my_random_seq <- DNAStringSet(my_random_seq)
 names(my_random_seq) <- 1:my_number

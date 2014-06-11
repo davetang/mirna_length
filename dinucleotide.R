@@ -9,6 +9,8 @@ if(!my_check){
 #load package
 library(Biostrings)
 
+nucleotides <- c('A', 'C', 'G', 'T')
+
 #store fasta
 my_mirna <- readDNAStringSet('mature_thymine.fa.gz', 'fasta')
 
@@ -17,15 +19,65 @@ di_freq <- dinucleotideFrequency(my_mirna)
 colSums(di_freq)
 
 #human miRNAs
-human_mirna <- my_mirna[grep('Homo sapien',names(my_mirna))]
-human_di_freq <- dinucleotideFrequency(human_mirna)
-colSums(human_di_freq)
-
+organism <- 'Homo sapien'
+organism_mirna <- my_mirna[grep(organism,names(my_mirna))]
+di_freq <- dinucleotideFrequency(organism_mirna)
 #probabilities of dinucleotides
-colSums(human_di_freq)*100/sum(human_di_freq)
-
+di_freq_summary <- colSums(di_freq)*100/sum(di_freq)
+mytransitionmatrix <- matrix(di_freq_summary, nrow=4, byrow=T)
+rownames(mytransitionmatrix) <- nucleotides
+colnames(mytransitionmatrix) <- nucleotides
 #frequency of first bases
-colSums(alphabetFrequency(subseq(human_mirna,1,1))[,1:4])
-
+#colSums(alphabetFrequency(subseq(human_mirna,1,1))[,1:4])
 #probabilites of first bases
-colSums(alphabetFrequency(subseq(human_mirna,1,1))[,1:4])*100/length(human_mirna)
+myinitialprobs <- unname(colSums(alphabetFrequency(subseq(organism_mirna,1,1))[,1:4])*100/length(organism_mirna))
+save(myinitialprobs, file='human_init_prob.Robject')
+save(mytransitionmatrix, file='human_trans_mat.Robject')
+
+#mouse miRNAs
+organism <- 'Mus musculus'
+organism_mirna <- my_mirna[grep(organism,names(my_mirna))]
+di_freq <- dinucleotideFrequency(organism_mirna)
+#probabilities of dinucleotides
+di_freq_summary <- colSums(di_freq)*100/sum(di_freq)
+mytransitionmatrix <- matrix(di_freq_summary, nrow=4, byrow=T)
+rownames(mytransitionmatrix) <- nucleotides
+colnames(mytransitionmatrix) <- nucleotides
+#frequency of first bases
+#colSums(alphabetFrequency(subseq(human_mirna,1,1))[,1:4])
+#probabilites of first bases
+myinitialprobs <- unname(colSums(alphabetFrequency(subseq(organism_mirna,1,1))[,1:4])*100/length(organism_mirna))
+save(myinitialprobs, file='mouse_init_prob.Robject')
+save(mytransitionmatrix, file='mouse_trans_mat.Robject')
+
+#celegans miRNAs
+organism <- 'Caenorhabditis elegans'
+organism_mirna <- my_mirna[grep(organism,names(my_mirna))]
+di_freq <- dinucleotideFrequency(organism_mirna)
+#probabilities of dinucleotides
+di_freq_summary <- colSums(di_freq)*100/sum(di_freq)
+mytransitionmatrix <- matrix(di_freq_summary, nrow=4, byrow=T)
+rownames(mytransitionmatrix) <- nucleotides
+colnames(mytransitionmatrix) <- nucleotides
+#frequency of first bases
+#colSums(alphabetFrequency(subseq(human_mirna,1,1))[,1:4])
+#probabilites of first bases
+myinitialprobs <- unname(colSums(alphabetFrequency(subseq(organism_mirna,1,1))[,1:4])*100/length(organism_mirna))
+save(myinitialprobs, file='celegans_init_prob.Robject')
+save(mytransitionmatrix, file='celegans_trans_mat.Robject')
+
+#zebrafish
+organism <- 'Danio rerio'
+organism_mirna <- my_mirna[grep(organism,names(my_mirna))]
+di_freq <- dinucleotideFrequency(organism_mirna)
+#probabilities of dinucleotides
+di_freq_summary <- colSums(di_freq)*100/sum(di_freq)
+mytransitionmatrix <- matrix(di_freq_summary, nrow=4, byrow=T)
+rownames(mytransitionmatrix) <- nucleotides
+colnames(mytransitionmatrix) <- nucleotides
+#frequency of first bases
+#colSums(alphabetFrequency(subseq(human_mirna,1,1))[,1:4])
+#probabilites of first bases
+myinitialprobs <- unname(colSums(alphabetFrequency(subseq(organism_mirna,1,1))[,1:4])*100/length(organism_mirna))
+save(myinitialprobs, file='zebrafish_init_prob.Robject')
+save(mytransitionmatrix, file='zebrafish_trans_mat.Robject')

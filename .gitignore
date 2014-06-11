@@ -5,3 +5,5 @@ hg38.*
 mouse
 celegans
 zebrafish
+human
+*.Robject
