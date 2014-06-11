@@ -6,35 +6,36 @@ wget ftp://mirbase.org/pub/mirbase/CURRENT/mature.fa.gz
 
 zcat mature.fa.gz | perl -nle 'if (/^>/){print} else { s/U/T/g; print }' | gzip > mature_thymine.fa.gz
 
-#download genomes
-#human
-mkdir hg38
-wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz -O human/hg38.fa.gz
-gunzip human/hg38.fa.gz
-#mouse
-mkdir mm10
-wget http://hgdownload.cse.ucsc.edu/goldenPath/mm10/bigZips/mm10.2bit -O mouse/mm10.2bit
-twoBitToFa mouse/mm10.2bit mouse/mm10.fa
-#zebrafish
-mkdir danRer7
-wget http://hgdownload.cse.ucsc.edu/goldenPath/danRer7/bigZips/danRer7.fa.gz -O zebrafish/danRer7.fa.gz
-gunzip zebrafish/danRer7.fa.gz
-#celegans
-mkdir ce10
-wget http://hgdownload.cse.ucsc.edu/goldenPath/ce10/bigZips/ce10.2bit -O celegans/ce10.2bit
-twoBitToFa celegans/ce10.2bit celegans/ce10.fa
-
 #download BWA
 wget http://sourceforge.net/projects/bio-bwa/files/bwa-0.7.9a.tar.bz2
 tar -xjf bwa-0.7.9a.tar.bz2
 cd bwa-0.7.9a/
 make
+cd ..
+
+#download genomes
+#human
+mkdir hg38
+wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz -O hg38/hg38.fa.gz
+gunzip human/hg38.fa.gz
+#mouse
+mkdir mm10
+wget http://hgdownload.cse.ucsc.edu/goldenPath/mm10/bigZips/mm10.2bit -O mm10/mm10.2bit
+twoBitToFa mouse/mm10.2bit mouse/mm10.fa
+#zebrafish
+mkdir danRer7
+wget http://hgdownload.cse.ucsc.edu/goldenPath/danRer7/bigZips/danRer7.fa.gz -O danRer7/danRer7.fa.gz
+gunzip zebrafish/danRer7.fa.gz
+#celegans
+mkdir ce10
+wget http://hgdownload.cse.ucsc.edu/goldenPath/ce10/bigZips/ce10.2bit -O ce10/ce10.2bit
+twoBitToFa celegans/ce10.2bit celegans/ce10.fa
 
 #index genomes
-bwa index danRer7/danRer7.fa
-bwa index ce10/ce10.fa
-bwa index hg38/hg38.fa
-bwa index mm10/mm10.fa
+bwa-0.7.9a/bwa index danRer7/danRer7.fa
+bwa-0.7.9a/bwa index ce10/ce10.fa
+bwa-0.7.9a/bwa index hg38/hg38.fa
+bwa-0.7.9a/bwa index mm10/mm10.fa
 
 R --no-save < dinucleotide.R
 R --no-save < genome_freq.R
@@ -53,8 +54,8 @@ for org in hg38 mm10 ce10 danRer7
    do for file in `ls $org/my_random*.fa`;
       do echo $org/$file;
       base=`basename $org/$file .fa`
-      bwa aln -t 12 $org/$org.fa $org/$file > $org/$base.sai
-      bwa samse $org/$org.fa $org/$base.sai $org/$file > $org/$base.sam
+      bwa-0.7.9a/bwa aln -t 12 $org/$org.fa $org/$file > $org/$base.sai
+      bwa-0.7.9a/bwa samse $org/$org.fa $org/$base.sai $org/$file > $org/$base.sam
       samtools view -bS $org/$base.sam > $org/$base.bam
       samtools sort $org/$base.bam $org/${base}_sorted
       rm $org/$base.sam $org/$base.bam $org/$base.sai
