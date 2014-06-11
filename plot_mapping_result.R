@@ -2,10 +2,10 @@
 required_package <- c('ggplot2', 'reshape2')
 my_check <- required_package %in% installed.packages()[,"Package"]
 if(!my_check[1]){
-  install.packages("ggplot2")
+   install.packages("ggplot2", repos='http://cran.us.r-project.org')
 }
 if(!my_check[2]){
-  install.packages("reshape2")
+   install.packages("reshape2", repos='http://cran.us.r-project.org')
 }
 
 #load package
