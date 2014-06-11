@@ -2,14 +2,15 @@
 
 #store arguments in object
 args <- commandArgs(TRUE)
-#check for 1 arguments
+#check arguments
 args_length <- length(args)
-if (args_length != 3){
-   stop("Requires size of fragment, genome frequency object as input, and directory to write files")
+if (args_length != 4){
+   stop("Requires size of fragment, genome frequency object as input, number to generate, and directory to write files")
 }
 my_size <- args[1]
 my_freq <- args[2]
-my_dir <- args[3]
+my_number <- args[3]
+my_dir <- args[4]
 
 load(my_freq)
 
@@ -39,8 +40,7 @@ gen_seq <- function(x){
    return(my_seq)
 }
 
-my_number <- 1000000
-my_outfile <- paste(my_dir, '/my_random_seq_gen_freq_', my_size, '.fa', sep='')
+my_outfile <- paste(my_dir, '/my_random_seq_gen_freq_', my_size, '_', my_number, '.fa', sep='')
 my_random_seq <- sapply(1:my_number, gen_seq)
 my_random_seq <- DNAStringSet(my_random_seq)
 names(my_random_seq) <- 1:my_number

@@ -2,15 +2,16 @@
 
 #store arguments in object
 args <- commandArgs(TRUE)
-#check for 3 arguments
+#check arguments
 args_length <- length(args)
-if (args_length != 4){
-   stop("Requires size of fragment, transition matrix object, and initial probabilities object")
+if (args_length != 5){
+   stop("Requires size of fragment, transition matrix object, initial probabilities object, number to generate, and directory to write to")
 }
 my_size <- args[1]
 mytransitionmatrix <- args[2]
 myinitialprobs <- args[3]
-my_dir <- args[4]
+my_number <- args[4]
+my_dir <- args[5]
 
 load(mytransitionmatrix)
 load(myinitialprobs)
@@ -46,9 +47,7 @@ generatemarkovseq <- function(x, transitionmatrix, initialprobs, seqlength){
 	return(mysequence)
 }
 
-my_number <- 1000000
-
-my_outfile <- paste(my_dir, '/my_random_seq_markov_', my_size, '.fa', sep='')
+my_outfile <- paste(my_dir, '/my_random_seq_markov_', my_size, '_', my_number, '.fa', sep='')
 
 my_random_seq <- sapply(1:my_number, generatemarkovseq, transitionmatrix=mytransitionmatrix, initialprobs=myinitialprobs, seqlength=my_size)
 

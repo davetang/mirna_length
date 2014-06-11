@@ -6,7 +6,7 @@ t <- 900967885
 acgt <- sum(a, c, g, t)
 #set probabilities
 my_prob <- c(a*100/acgt, c*100/acgt, g*100/acgt, t*100/acgt)
-save(my_prob, file='human_nuc_freq.Robject')
+save(my_prob, file='hg38_nuc_freq.Robject')
 
 #frequency in c. elegans
 a <- 32371753
@@ -16,7 +16,7 @@ t <- 32373265
 acgt <- sum(a, c, g, t)
 #set probabilities
 my_prob <- c(a*100/acgt, c*100/acgt, g*100/acgt, t*100/acgt)
-save(my_prob, file='celegans_nuc_freq.Robject')
+save(my_prob, file='ce10_nuc_freq.Robject')
 
 #frequency in zebrafish
 a <- 446195643
@@ -26,7 +26,7 @@ t <- 446029177
 acgt <- sum(a, c, g, t)
 #set probabilities
 my_prob <- c(a*100/acgt, c*100/acgt, g*100/acgt, t*100/acgt)
-save(my_prob, file='zebrafish_nuc_freq.Robject')
+save(my_prob, file='danRer7_nuc_freq.Robject')
 
 #frequency in mouse
 a <- 773280124
@@ -36,4 +36,4 @@ t <- 774165441
 acgt <- sum(a, c, g, t)
 #set probabilities
 my_prob <- c(a*100/acgt, c*100/acgt, g*100/acgt, t*100/acgt)
-save(my_prob, file='mouse_nuc_freq.Robject')
+save(my_prob, file='mm10_nuc_freq.Robject')
