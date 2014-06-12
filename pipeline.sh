@@ -1,5 +1,13 @@
 #!/bin/bash
 
+usage(){
+   echo "Usage: $0 <number to generate>"
+   exit 1
+}
+
+[[ $# -eq 0 ]] && usage
+my_number=$1
+
 #download mature miRNAs
 if [ ! -f mature.fa.gz ]
 then
@@ -69,38 +77,59 @@ then
    twoBitToFa $celegans/$celegans.2bit $celegans/$celegans.fa
 fi
 
-#index genomes
-if [ ! -f $zebrafish/$zebrafish.fa.amb ] || [ ! -f $zebrafish/$zebrafish.fa.ann ] || [ ! -f $zebrafish/$zebrafish.fa.bwt ] || [ ! -f $zebrafish/$zebrafish.fa.pac ] || [ ! -f $zebrafish/$zebrafish.fa.sa ]
+#index genomes if all bwa index files are missing
+if [ ! -f $zebrafish/$zebrafish.fa.amb ] && [ ! -f $zebrafish/$zebrafish.fa.ann ] && [ ! -f $zebrafish/$zebrafish.fa.bwt ] && [ ! -f $zebrafish/$zebrafish.fa.pac ] && [ ! -f $zebrafish/$zebrafish.fa.sa ]
 then
    bwa-0.7.9a/bwa index $zebrafish/$zebrafish.fa
 fi
 
-if [ ! -f $mouse/$mouse.fa.amb ] || [ ! -f $mouse/$mouse.fa.ann ] || [ ! -f $mouse/$mouse.fa.bwt ] || [ ! -f $mouse/$mouse.fa.pac ] || [ ! -f $mouse/$mouse.fa.sa ]
+if [ ! -f $mouse/$mouse.fa.amb ] && [ ! -f $mouse/$mouse.fa.ann ] && [ ! -f $mouse/$mouse.fa.bwt ] && [ ! -f $mouse/$mouse.fa.pac ] && [ ! -f $mouse/$mouse.fa.sa ]
 then
    bwa-0.7.9a/bwa index $mouse/$mouse.fa
 fi
 
-if [ ! -f $human/$human.fa.amb ] || [ ! -f $human/$human.fa.ann ] || [ ! -f $human/$human.fa.bwt ] || [ ! -f $human/$human.fa.pac ] || [ ! -f $human/$human.fa.sa ]
+if [ ! -f $human/$human.fa.amb ] && [ ! -f $human/$human.fa.ann ] && [ ! -f $human/$human.fa.bwt ] && [ ! -f $human/$human.fa.pac ] && [ ! -f $human/$human.fa.sa ]
 then
    bwa-0.7.9a/bwa index $human/$human.fa
 fi
 
-if [ ! -f $celegans/$celegans.fa.amb ] || [ ! -f $celegans/$celegans.fa.ann ] || [ ! -f $celegans/$celegans.fa.bwt ] || [ ! -f $celegans/$celegans.fa.pac ] || [ ! -f $celegans/$celegans.fa.sa ]
+if [ ! -f $celegans/$celegans.fa.amb ] && [ ! -f $celegans/$celegans.fa.ann ] && [ ! -f $celegans/$celegans.fa.bwt ] && [ ! -f $celegans/$celegans.fa.pac ] && [ ! -f $celegans/$celegans.fa.sa ]
 then
    bwa-0.7.9a/bwa index $celegans/$celegans.fa
 fi
 
-R --no-save < dinucleotide.R
-R --no-save < genome_freq.R
+if [ ! -f hg38_init_prob.Robject ] || [ ! -f hg38_trans_mat.Robject ] || [ ! -f mm10_init_prob.Robject ] || [ ! -f mm10_trans_mat.Robject ] || [ ! -f ce10_init_prob.Robject ] || [ ! -f ce10_trans_mat.Robject ] || [ ! -f danRer7_init_prob.Robject ] || [ ! -f danRer7_trans_mat.Robject ]
+then
+   R --no-save < dinucleotide.R
+fi
 
-my_number=1000000
+if [ ! -f hg38_nuc_freq.Robject ] || [ ! -f ce10_nuc_freq.Robject ] || [ ! -f danRer7_nuc_freq.Robject ] || [ ! -f mm10_nuc_freq.Robject ]
+then
+   R --no-save < genome_freq.R
+fi
 
 #generate random sequences
 for org in $human $mouse $celegans $zebrafish
    do for i in {15..30}
-      do Rscript seq_by_markov_chain.R $i ${org}_trans_mat.Robject ${org}_init_prob.Robject $my_number $org
-      Rscript seq_by_equal.R $i $my_number $org
-      Rscript seq_by_gen_freq.R $i ${org}_nuc_freq.Robject $my_number $org
+      do
+
+		if [ ! -f $org/my_random_seq_markov_${i}_${my_number}.fa ]
+		then
+         touch $org/my_random_seq_markov_${i}_${my_number}.fa
+		   Rscript seq_by_markov_chain.R $i ${org}_trans_mat.Robject ${org}_init_prob.Robject $my_number $org
+      fi
+
+		if [ ! -f $org/my_random_seq_equal_${i}_${my_number}.fa ]
+		then
+         touch $org/my_random_seq_equal_${i}_${my_number}.fa
+         Rscript seq_by_equal.R $i $my_number $org
+      fi
+
+		if [ ! -f $org/my_random_seq_gen_freq_${i}_${my_number}.fa ]
+		then
+         touch $org/my_random_seq_gen_freq_${i}_${my_number}.fa
+         Rscript seq_by_gen_freq.R $i ${org}_nuc_freq.Robject $my_number $org
+      fi
    done
 done
 
@@ -109,23 +138,38 @@ for org in $human $mouse $celegans $zebrafish
    do for file in `ls $org/my_random*.fa`;
       do echo $org/$file;
       base=`basename $org/$file .fa`
-      bwa-0.7.9a/bwa aln -t 12 $org/$org.fa $org/$file > $org/$base.sai
-      bwa-0.7.9a/bwa samse $org/$org.fa $org/$base.sai $org/$file > $org/$base.sam
-      samtools view -bS $org/$base.sam > $org/$base.bam
-      samtools sort $org/$base.bam $org/${base}_sorted
-      rm $org/$base.sam $org/$base.bam $org/$base.sai
+		if [ ! -f $org/${base}_sorted ]
+		then
+         bwa-0.7.9a/bwa aln -t 12 $org/$org.fa $org/$file > $org/$base.sai
+         bwa-0.7.9a/bwa samse $org/$org.fa $org/$base.sai $org/$file > $org/$base.sam
+         samtools view -bS $org/$base.sam > $org/$base.bam
+         samtools sort $org/$base.bam $org/${base}_sorted
+         rm $org/$base.sam $org/$base.bam $org/$base.sai
+      fi
    done
 done
 
 #transition images
-Rscript image/transition.R ce10_trans_mat.Robject
-Rscript image/transition.R danRer7_trans_mat.Robject
-Rscript image/transition.R hg38_trans_mat.Robject
-Rscript image/transition.R mm10_trans_mat.Robject
-convert image/ce10.eps -trim +repage image/ce10.pdf
-convert image/danRer7.eps -trim +repage image/danRer7.pdf
-convert image/hg38.eps -trim +repage image/hg38.pdf
-convert image/mm10.eps -trim +repage image/mm10.pdf
+if [ ! -f image/$celegans.eps ]
+then
+   Rscript image/transition.R ${ce10}_trans_mat.Robject
+   convert image/$celegans.eps -trim +repage image/$celegans.pdf
+fi
+if [ ! -f image/$zebrafish.eps ]
+then
+   Rscript image/transition.R ${zebrafish}_trans_mat.Robject
+   convert image/$zebrafish.eps -trim +repage image/$zebrafish.pdf
+fi
+if [ ! -f image/$human.eps ]
+then
+   Rscript image/transition.R ${human}_trans_mat.Robject
+   convert image/$human.eps -trim +repage image/$human.pdf
+fi
+if [ ! -f image/$human.eps ]
+then
+   Rscript image/transition.R ${mouse}_trans_mat.Robject
+   convert image/$mouse.eps -trim +repage image/$mouse.pdf
+fi
 
 exit
 
