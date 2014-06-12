@@ -3,9 +3,11 @@ README
 
 Run pipeline.sh with the number of random sequences to generate as the first parameter. It is possible to run multiple instances of pipeline.sh, to speed things up (though this hasn't been extensively tested). The script downloads necessary files, generates the random sequences, and maps them back to the respective genomes.
 
+This work was inspired by an observation I made back in 2012 (http://davetang.org/muse/2012/03/08/why-mirna-are-22-or-23-nucleotides-long/).
+
 ### Clone this repository
 
-git clone https://github.com/davetang/mirna_length.git
+`git clone https://github.com/davetang/mirna_length.git`
 
 ### Perform the entire analysis
 
