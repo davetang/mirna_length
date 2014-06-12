@@ -136,13 +136,13 @@ done
 #align random sequences
 for org in $human $mouse $celegans $zebrafish
    do for file in `ls $org/my_random*.fa`;
-      do echo $org/$file;
-      base=`basename $org/$file .fa`
-		if [ ! -f $org/${base}_sorted ]
-		then
-		   touch $org/${base}_sorted.bam
-         bwa-0.7.9a/bwa aln -t 12 $org/$org.fa $org/$file > $org/$base.sai
-         bwa-0.7.9a/bwa samse $org/$org.fa $org/$base.sai $org/$file > $org/$base.sam
+      do echo $file;
+      base=`basename $file .fa`
+      if [ ! -f $org/${base}_sorted.bam ]
+      then
+         touch $org/${base}_sorted.bam
+         bwa-0.7.9a/bwa aln -t 12 $org/$org.fa $file > $org/$base.sai
+         bwa-0.7.9a/bwa samse $org/$org.fa $org/$base.sai $file > $org/$base.sam
          samtools view -bS $org/$base.sam > $org/$base.bam
          samtools sort $org/$base.bam $org/${base}_sorted
          rm $org/$base.sam $org/$base.bam $org/$base.sai
