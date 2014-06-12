@@ -1,59 +1,111 @@
 #!/bin/bash
 
 #download mature miRNAs
-#Mon Jun  9 14:33:00 JST 2014
-wget ftp://mirbase.org/pub/mirbase/CURRENT/mature.fa.gz
-
-zcat mature.fa.gz | perl -nle 'if (/^>/){print} else { s/U/T/g; print }' > mature_thymine.fa
+if [ ! -f mature.fa.gz ]
+then
+   wget ftp://mirbase.org/pub/mirbase/CURRENT/mature.fa.gz
+   zcat mature.fa.gz | perl -nle 'if (/^>/){print} else { s/U/T/g; print }' > mature_thymine.fa
+fi
 
 #download BWA
-wget http://sourceforge.net/projects/bio-bwa/files/bwa-0.7.9a.tar.bz2
-tar -xjf bwa-0.7.9a.tar.bz2
-cd bwa-0.7.9a/
-make
-cd ..
+if [ ! -f bwa*.tar.bz2 ]
+then
+   wget http://sourceforge.net/projects/bio-bwa/files/bwa-0.7.9a.tar.bz2
+   tar -xjf bwa-0.7.9a.tar.bz2
+   cd bwa-0.7.9a/
+   make
+   cd ..
+fi
 
-wget http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/twoBitToFa
-chmod 755 twoBitToFa
+#download twoBitToFa
+if [ ! -f twoBitToFa ]
+then
+   wget http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/twoBitToFa
+   chmod 755 twoBitToFa
+fi
+
+human=hg38
+mouse=mm10
+celegans=ce10
+zebrafish=danRer7
+
+#create genome directories
+if [ ! -d $human ]
+then
+   mkdir $human
+fi
+if [ ! -d $mouse ]
+then
+   mkdir $mouse
+fi
+if [ ! -d $zebrafish ]
+then
+   mkdir $zebrafish
+fi
+if [ ! -d $celegans ]
+then
+   mkdir $celegans
+fi
 
 #download genomes
-#human
-mkdir hg38
-wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz -O hg38/hg38.fa.gz
-gunzip hg38/hg38.fa.gz
-#mouse
-mkdir mm10
-wget http://hgdownload.cse.ucsc.edu/goldenPath/mm10/bigZips/mm10.2bit -O mm10/mm10.2bit
-twoBitToFa mm10/mm10.2bit mm10/mm10.fa
-#zebrafish
-mkdir danRer7
-wget http://hgdownload.cse.ucsc.edu/goldenPath/danRer7/bigZips/danRer7.fa.gz -O danRer7/danRer7.fa.gz
-gunzip danRer7/danRer7.fa.gz
-#celegans
-mkdir ce10
-wget http://hgdownload.cse.ucsc.edu/goldenPath/ce10/bigZips/ce10.2bit -O ce10/ce10.2bit
-twoBitToFa ce10/ce10.2bit ce10/ce10.fa
+if [ ! -f $human/$human.2bit ]
+then
+   wget http://hgdownload.cse.ucsc.edu/goldenPath/$human/bigZips/$human.2bit -O $human/$human.2bit
+   twoBitToFa $human/$human.2bit $human/$human.fa
+fi
+if [ ! -f $mouse/$mouse.2bit ]
+then
+   wget http://hgdownload.cse.ucsc.edu/goldenPath/$mouse/bigZips/$mouse.2bit -O $mouse/$mouse.2bit
+   twoBitToFa $mouse/$mouse.2bit $mouse/$mouse.fa
+fi
+if [ ! -f $zebrafish/$zebrafish.2bit ]
+then
+   wget http://hgdownload.cse.ucsc.edu/goldenPath/$zebrafish/bigZips/$zebrafish.2bit -O $zebrafish/$zebrafish.2bit
+   twoBitToFa $zebrafish/$zebrafish.2bit $zebrafish/$zebrafish.fa
+fi
+if [ ! -f $celegans/$celegans.2bit ]
+then
+   wget http://hgdownload.cse.ucsc.edu/goldenPath/$celegans/bigZips/$celegans.2bit -O $celegans/$celegans.2bit
+   twoBitToFa $celegans/$celegans.2bit $celegans/$celegans.fa
+fi
 
 #index genomes
-bwa-0.7.9a/bwa index danRer7/danRer7.fa
-bwa-0.7.9a/bwa index ce10/ce10.fa
-bwa-0.7.9a/bwa index hg38/hg38.fa
-bwa-0.7.9a/bwa index mm10/mm10.fa
+if [ ! -f $zebrafish/$zebrafish.fa.amb ] || [ ! -f $zebrafish/$zebrafish.fa.ann ] || [ ! -f $zebrafish/$zebrafish.fa.bwt ] || [ ! -f $zebrafish/$zebrafish.fa.pac ] || [ ! -f $zebrafish/$zebrafish.fa.sa ]
+then
+   bwa-0.7.9a/bwa index $zebrafish/$zebrafish.fa
+fi
+
+if [ ! -f $mouse/$mouse.fa.amb ] || [ ! -f $mouse/$mouse.fa.ann ] || [ ! -f $mouse/$mouse.fa.bwt ] || [ ! -f $mouse/$mouse.fa.pac ] || [ ! -f $mouse/$mouse.fa.sa ]
+then
+   bwa-0.7.9a/bwa index $mouse/$mouse.fa
+fi
+
+if [ ! -f $human/$human.fa.amb ] || [ ! -f $human/$human.fa.ann ] || [ ! -f $human/$human.fa.bwt ] || [ ! -f $human/$human.fa.pac ] || [ ! -f $human/$human.fa.sa ]
+then
+   bwa-0.7.9a/bwa index $human/$human.fa
+fi
+
+if [ ! -f $celegans/$celegans.fa.amb ] || [ ! -f $celegans/$celegans.fa.ann ] || [ ! -f $celegans/$celegans.fa.bwt ] || [ ! -f $celegans/$celegans.fa.pac ] || [ ! -f $celegans/$celegans.fa.sa ]
+then
+   bwa-0.7.9a/bwa index $celegans/$celegans.fa
+fi
 
 R --no-save < dinucleotide.R
 R --no-save < genome_freq.R
 
+my_number=1000000
+
 #generate random sequences
-for org in hg38 mm10 ce10 danRer7
+for org in $human $mouse $celegans $zebrafish
    do for i in {15..30}
-      do Rscript seq_by_markov_chain.R $i ${org}_trans_mat.Robject ${org}_init_prob.Robject 20 $org
-      Rscript seq_by_equal.R $i 20 $org
-      Rscript seq_by_gen_freq.R $i ${org}_nuc_freq.Robject 20 $org
+      do Rscript seq_by_markov_chain.R $i ${org}_trans_mat.Robject ${org}_init_prob.Robject $my_number $org
+      Rscript seq_by_equal.R $i $my_number $org
+      Rscript seq_by_gen_freq.R $i ${org}_nuc_freq.Robject $my_number $org
    done
 done
 
 #align random sequences
-for org in hg38 mm10 ce10 danRer7
+for org in $human $mouse $celegans $zebrafish
    do for file in `ls $org/my_random*.fa`;
       do echo $org/$file;
       base=`basename $org/$file .fa`
