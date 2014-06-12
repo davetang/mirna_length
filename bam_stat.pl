@@ -8,8 +8,8 @@ my $infile = shift or die $usage;
  
 my %ed = ();
 my %multimappers = ();
-my $mapped = '0';
-my $unmapped = '0';
+my $mapped = 0;
+my $unmapped = 0;
 
 if ($infile =~ /\.sam$/){
    open (IN,'<',$infile) || die "Could not open $infile: $!\n";
@@ -58,6 +58,9 @@ print "Mapped: $mapped\n";
 print "Unmapped: $unmapped\n";
  
 print "Edit distances\n";
+if (!exists $ed{0}){
+   print "0\t0\n";
+}
 foreach my $ed (sort {$a <=> $b} keys %ed){
    print "$ed\t$ed{$ed}\n";
 }
