@@ -140,6 +140,7 @@ for org in $human $mouse $celegans $zebrafish
       base=`basename $org/$file .fa`
 		if [ ! -f $org/${base}_sorted ]
 		then
+		   touch $org/${base}_sorted.bam
          bwa-0.7.9a/bwa aln -t 12 $org/$org.fa $org/$file > $org/$base.sai
          bwa-0.7.9a/bwa samse $org/$org.fa $org/$base.sai $org/$file > $org/$base.sam
          samtools view -bS $org/$base.sam > $org/$base.bam
