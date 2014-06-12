@@ -1,13 +1,15 @@
 README
 -----------------------------
 
+Run pipeline.sh with the number of random sequences to generate as the first parameter. It is possible to run multiple instances of pipeline.sh, to speed things up (though this hasn't been extensively tested). The script downloads necessary files, generates the random sequences, and maps them back to the respective genomes.
+
 ### Clone this repository
 
 git clone https://github.com/davetang/mirna_length.git
 
-### Perform all analyses
+### Perform the entire analysis
 
-`pipeline.sh`
+`pipeline.sh 1000000`
 
 ### Generate the transition matrices and first base frequencies
 
