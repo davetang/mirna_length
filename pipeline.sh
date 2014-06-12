@@ -112,21 +112,18 @@ fi
 for org in $human $mouse $celegans $zebrafish
    do for i in {15..30}
       do
-
-		if [ ! -f $org/my_random_seq_markov_${i}_${my_number}.fa ]
-		then
+      if [ ! -f $org/my_random_seq_markov_${i}_${my_number}.fa ]
+      then
          touch $org/my_random_seq_markov_${i}_${my_number}.fa
-		   Rscript seq_by_markov_chain.R $i ${org}_trans_mat.Robject ${org}_init_prob.Robject $my_number $org
+         Rscript seq_by_markov_chain.R $i ${org}_trans_mat.Robject ${org}_init_prob.Robject $my_number $org
       fi
-
-		if [ ! -f $org/my_random_seq_equal_${i}_${my_number}.fa ]
-		then
+      if [ ! -f $org/my_random_seq_equal_${i}_${my_number}.fa ]
+      then
          touch $org/my_random_seq_equal_${i}_${my_number}.fa
          Rscript seq_by_equal.R $i $my_number $org
       fi
-
-		if [ ! -f $org/my_random_seq_gen_freq_${i}_${my_number}.fa ]
-		then
+      if [ ! -f $org/my_random_seq_gen_freq_${i}_${my_number}.fa ]
+      then
          touch $org/my_random_seq_gen_freq_${i}_${my_number}.fa
          Rscript seq_by_gen_freq.R $i ${org}_nuc_freq.Robject $my_number $org
       fi

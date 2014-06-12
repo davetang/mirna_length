@@ -43,8 +43,8 @@ generatemarkovseq <- function(x, transitionmatrix, initialprobs, seqlength){
       nucleotide     <- sample(nucleotides, 1, rep=TRUE, prob=probabilities)
       mysequence[i]  <- nucleotide          # Store the nucleotide for the current position of the sequence
    }
-	mysequence <- paste(mysequence, sep='', collapse='')
-	return(mysequence)
+   mysequence <- paste(mysequence, sep='', collapse='')
+   return(mysequence)
 }
 
 my_outfile <- paste(my_dir, '/my_random_seq_markov_', my_size, '_', my_number, '.fa', sep='')
