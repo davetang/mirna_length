@@ -1,6 +1,5 @@
 *.fa.gz
 *.fa
-hg38.*
 *.bam
 mm10
 ce10
