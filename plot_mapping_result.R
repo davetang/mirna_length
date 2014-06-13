@@ -34,8 +34,8 @@ for (org in my_org){
    p <- ggplot(count_perfect_melt, aes(x=length, y=value, fill=variable)) +
    geom_bar(position="dodge", stat="identity") +
    xlab('Length of random sequence') +
-   ylab('Log number of perfect matches') +
-   scale_y_log10(labels=comma)
+   ylab('Number of perfect matches') +
+   scale_y_continuous(trans = log2_trans(), labels=comma)
    ggsave(p, file=my_outfile)
 
    my_file <- paste(org, '/', 'equal_mapped_1000000.txt', sep='')
@@ -55,7 +55,9 @@ for (org in my_org){
    p <- ggplot(count_mapped_melt, aes(x=length, y=value, fill=variable)) +
    geom_bar(position="dodge", stat="identity") +
    xlab('Length of random sequence') +
-   ylab('Log number mapped') +
-   scale_y_log10(labels=comma)
+   ylab('Number mapped') +
+   scale_y_continuous(trans = log2_trans(), labels=comma)
    ggsave(p, file=my_outfile)
 }
+
+file.remove('Rplots.pdf')
