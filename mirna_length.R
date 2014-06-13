@@ -13,6 +13,9 @@ if(!my_check[2]){
 library(Biostrings)
 library(ggplot2)
 
+#larger font
+theme_set(theme_gray(base_size = 20))
+
 #store fasta
 my_mirna <- readDNAStringSet('mature_thymine.fa', 'fasta')
 
