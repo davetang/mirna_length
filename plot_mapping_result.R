@@ -28,7 +28,7 @@ for (org in my_org){
                               )
    count_perfect_melt <- melt(count_perfect, id.vars='length')
    #larger font
-   theme_set(theme_gray(base_size = 20))
+   theme_set(theme_gray(base_size = 25))
 
    my_outfile <- paste('image/', org, '_perfect_mapped_1000000.eps', sep='')
    p <- ggplot(count_perfect_melt, aes(x=length, y=value, fill=variable)) +

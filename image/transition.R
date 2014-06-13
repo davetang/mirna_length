@@ -36,10 +36,10 @@ plotmat(mytransitionmatrix, #transition matrix
         relsize=0.7,
         name = nucleotides, #names of the states
         box.lwd=1, #outline of state
-        cex.txt=1.2, #size of probabilities
+        cex.txt=1.4, #size of probabilities
         box.prop=1, #size of box
         box.type = 'circle',
-        self.cex = 1.2, #size of self probability
+        self.cex = 1.4, #size of self probability
         lwd = 1, #outline of probabilities
         box.cex=2 #size of text in box
 		  )

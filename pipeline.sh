@@ -148,25 +148,25 @@ for org in $human $mouse $celegans $zebrafish
 done
 
 #transition images
-if [ ! -f image/$celegans.eps ]
+if [ -f image/$celegans.eps ]
 then
-   Rscript image/transition.R ${ce10}_trans_mat.Robject
-   convert image/$celegans.eps -trim +repage image/$celegans.pdf
+   Rscript image/transition.R ${celegans}_trans_mat.Robject
+   convert image/$celegans.eps -trim +repage -density 100 image/$celegans.pdf
 fi
-if [ ! -f image/$zebrafish.eps ]
+if [ -f image/$zebrafish.eps ]
 then
    Rscript image/transition.R ${zebrafish}_trans_mat.Robject
-   convert image/$zebrafish.eps -trim +repage image/$zebrafish.pdf
+   convert image/$zebrafish.eps -trim +repage -density 100 image/$zebrafish.pdf
 fi
-if [ ! -f image/$human.eps ]
+if [ -f image/$human.eps ]
 then
    Rscript image/transition.R ${human}_trans_mat.Robject
-   convert image/$human.eps -trim +repage image/$human.pdf
+   convert image/$human.eps -trim +repage -density 100 image/$human.pdf
 fi
-if [ ! -f image/$human.eps ]
+if [ -f image/$human.eps ]
 then
    Rscript image/transition.R ${mouse}_trans_mat.Robject
-   convert image/$mouse.eps -trim +repage image/$mouse.pdf
+   convert image/$mouse.eps -trim +repage -density 100 image/$mouse.pdf
 fi
 
 #miRNA lengths

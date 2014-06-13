@@ -14,7 +14,7 @@ library(Biostrings)
 library(ggplot2)
 
 #larger font
-theme_set(theme_gray(base_size = 20))
+theme_set(theme_gray(base_size = 40))
 
 #store fasta
 my_mirna <- readDNAStringSet('mature_thymine.fa', 'fasta')
