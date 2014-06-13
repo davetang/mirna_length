@@ -11,6 +11,7 @@ if(!my_check[2]){
 #load package
 library(ggplot2)
 library(reshape2)
+library(scales)
 
 my_org <- c('hg38', 'mm10', 'danRer7', 'ce10')
 for (org in my_org){
@@ -21,9 +22,9 @@ for (org in my_org){
    my_file <- paste(org, '/', 'markov_perfect_mapped_1000000.txt', sep='')
    markov_perfect <- scan(my_file)
    count_perfect <- data.frame(length=factor(15:30),
-                               markov=markov_perfect,
-                               genome=genome_perfect,
-                               equal=equal_perfect
+                               markov=markov_perfect+1,
+                               genome=genome_perfect+1,
+                               equal=equal_perfect+1
                               )
    count_perfect_melt <- melt(count_perfect, id.vars='length')
    #larger font
@@ -33,7 +34,8 @@ for (org in my_org){
    p <- ggplot(count_perfect_melt, aes(x=length, y=value, fill=variable)) +
    geom_bar(position="dodge", stat="identity") +
    xlab('Length of random sequence') +
-   ylab('Number of perfect matches')
+   ylab('Log number of perfect matches') +
+   scale_y_log10(labels=comma)
    ggsave(p, file=my_outfile)
 
    my_file <- paste(org, '/', 'equal_mapped_1000000.txt', sep='')
@@ -43,9 +45,9 @@ for (org in my_org){
    my_file <- paste(org, '/', 'markov_mapped_1000000.txt', sep='')
    markov_mapped <- scan(my_file)
    count_mapped <- data.frame(length=factor(15:30),
-                              markov=markov_mapped,
-                              genome=genome_mapped,
-                              equal=equal_mapped
+                              markov=markov_mapped+1,
+                              genome=genome_mapped+1,
+                              equal=equal_mapped+1
                              )
    count_mapped_melt <- melt(count_mapped, id.vars='length')
 
@@ -53,6 +55,7 @@ for (org in my_org){
    p <- ggplot(count_mapped_melt, aes(x=length, y=value, fill=variable)) +
    geom_bar(position="dodge", stat="identity") +
    xlab('Length of random sequence') +
-   ylab('Number mapped')
+   ylab('Log number mapped') +
+   scale_y_log10(labels=comma)
    ggsave(p, file=my_outfile)
 }
