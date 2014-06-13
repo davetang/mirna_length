@@ -169,4 +169,58 @@ then
    convert image/$mouse.eps -trim +repage image/$mouse.pdf
 fi
 
+#miRNA lengths
+if [ -f image/celegans_mirbase_length.eps ]
+then
+   convert image/celegans_mirbase_length.eps image/celegans_mirbase_length.pdf
+fi
+if [ -f image/mouse_mirbase_length.eps ]
+then
+   convert image/mouse_mirbase_length.eps image/mouse_mirbase_length.pdf
+fi
+if [ -f image/human_mirbase_length.eps ]
+then
+   convert image/human_mirbase_length.eps image/human_mirbase_length.pdf
+fi
+if [ -f image/zebrafish_mirbase_length.eps ]
+then
+   convert image/zebrafish_mirbase_length.eps image/zebrafish_mirbase_length.pdf
+fi
+
+#perfectly mapped
+if [ -f image/ce10_perfect_mapped_1000000.eps ]
+then
+   convert image/ce10_perfect_mapped_1000000.eps image/ce10_perfect_mapped_1000000.pdf
+fi
+if [ -f image/danRer7_perfect_mapped_1000000.eps ]
+then
+   convert image/danRer7_perfect_mapped_1000000.eps image/danRer7_perfect_mapped_1000000.pdf
+fi
+if [ -f image/hg38_perfect_mapped_1000000.eps ]
+then
+   convert image/hg38_perfect_mapped_1000000.eps image/hg38_perfect_mapped_1000000.pdf
+fi
+if [ -f image/mm10_perfect_mapped_1000000.eps ]
+then
+   convert image/mm10_perfect_mapped_1000000.eps image/mm10_perfect_mapped_1000000.pdf
+fi
+
+#mapped
+if [ -f image/ce10_mapped_1000000.eps ]
+then
+   convert image/ce10_mapped_1000000.eps image/ce10_mapped_1000000.pdf
+fi
+if [ -f image/danRer7_mapped_1000000.eps ]
+then
+   convert image/danRer7_mapped_1000000.eps image/danRer7_mapped_1000000.pdf
+fi
+if [ -f image/hg38_mapped_1000000.eps ]
+then
+   convert image/hg38_mapped_1000000.eps image/hg38_mapped_1000000.pdf
+fi
+if [ -f image/mm10_mapped_1000000.eps ]
+then
+   convert image/mm10_mapped_1000000.eps image/mm10_mapped_1000000.pdf
+fi
+
 exit

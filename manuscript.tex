@@ -56,27 +56,57 @@ All code underlying this work is available at \url{https://github.com/davetang/m
    \centering
    \begin{subfigure}{.5\textwidth}
       \centering
+      \includegraphics[width=.5\textwidth,natwidth=100,natheight=100,angle=270]{human_mirbase_length.pdf}
+      \caption{}
+      \label{fig:human_mirna_length}
+   \end{subfigure}%
+   \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.5\textwidth,natwidth=100,natheight=100,angle=270]{mouse_mirbase_length.pdf}
+      \caption{}
+      \label{fig:mouse_mirna_length}
+   \end{subfigure}
+   \begin{subfigure}{.5\columnwidth}
+      \centering
+      \includegraphics[width=.5\textwidth,natwidth=100,natheight=100,angle=270]{zebrafish_mirbase_length.pdf}
+      \caption{}
+      \label{fig:zebrafish_mirna_length}
+   \end{subfigure}%
+   \begin{subfigure}{.5\columnwidth}
+      \centering
+      \includegraphics[width=.5\textwidth,natwidth=100,natheight=100,angle=270]{celegans_mirbase_length.pdf}
+      \caption{}
+      \label{fig:celegans_mirna_length}
+   \end{subfigure}
+   \caption{Length of miRNAs from miRBase for (a) human, (b) mouse, (c) zebrafish, and (d) nematode.}
+   \label{fig:mirna_length}
+\end{figure}
+
+\begin{figure}
+   \centering
+   \begin{subfigure}{.5\textwidth}
+      \centering
       \includegraphics[width=.7\textwidth,natwidth=100,natheight=100,angle=270]{hg38.pdf}
       \caption{}
-      \label{fig:blah1}
+      \label{fig:hg38_transition}
    \end{subfigure}%
    \begin{subfigure}{.5\textwidth}
       \centering
       \includegraphics[width=.7\textwidth,natwidth=100,natheight=100,angle=270]{mm10.pdf}
       \caption{}
-      \label{fig:blah2}
+      \label{fig:mm10_transition}
    \end{subfigure}
    \begin{subfigure}{.5\columnwidth}
       \centering
       \includegraphics[width=.7\textwidth,natwidth=100,natheight=100,angle=270]{danRer7.pdf}
       \caption{}
-      \label{fig:blah3}
+      \label{fig:danRer7_transition}
    \end{subfigure}%
    \begin{subfigure}{.5\columnwidth}
       \centering
       \includegraphics[width=.7\textwidth,natwidth=100,natheight=100,angle=270]{ce10.pdf}
       \caption{}
-      \label{fig:blah4}
+      \label{fig:ce10_transition}
    \end{subfigure}
    \caption{Transition diagrams for (a) human, (b) mouse, (c) zebrafish, and (d) nematode based on dinucleotide frequencies from miRBase mature miRNAs.}
    \label{fig:transition}
@@ -90,18 +120,60 @@ The human genome is mainly composed of repetitive elements, many of which are tr
    \centering
    \begin{subfigure}{.5\textwidth}
       \centering
-      \includegraphics[width=\textwidth,natwidth=2345,natheight=1692]{mapped.png}
+      \includegraphics[width=.9\textwidth,natwidth=100,natheight=100]{hg38_mapped_1000000.pdf}
       \caption{}
-      \label{fig:mapped}
+      \label{fig:hg38_mapped}
    \end{subfigure}%
    \begin{subfigure}{.5\textwidth}
       \centering
-      \includegraphics[width=\textwidth,natwidth=2345,natheight=1692]{perfectly_mapped.png}
+      \includegraphics[width=.9\textwidth,natwidth=100,natheight=100]{mm10_mapped_1000000.pdf}
       \caption{}
-      \label{fig:perfect_mapped}
+      \label{fig:mm10_mapped}
    \end{subfigure}
-   \caption{Mapping statistics of three sets of randomly generated sequences. (a) Number of randomly generated sequences mapped back to the human genome. (b) Number of randomly generated sequences perfectly mapped, i.e. mapped without any edits, back to the human genome.}
-   \label{fig:mapping}
+   \begin{subfigure}{.5\columnwidth}
+      \centering
+      \includegraphics[width=.9\textwidth,natwidth=100,natheight=100]{danRer7_mapped_1000000.pdf}
+      \caption{}
+      \label{fig:danRer7_mapped}
+   \end{subfigure}%
+   \begin{subfigure}{.5\columnwidth}
+      \centering
+      \includegraphics[width=.9\textwidth,natwidth=100,natheight=100]{ce10_mapped_1000000.pdf}
+      \caption{}
+      \label{fig:ce10_mapped}
+   \end{subfigure}
+   \caption{}
+   \label{fig:mapped_statistic}
+\end{figure}
+
+\begin{figure}
+   \centering
+   \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.9\textwidth,natwidth=100,natheight=100]{hg38_perfect_mapped_1000000.pdf}
+      \caption{}
+      \label{fig:hg38_mapped_perfect}
+   \end{subfigure}%
+   \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.9\textwidth,natwidth=100,natheight=100]{mm10_perfect_mapped_1000000.pdf}
+      \caption{}
+      \label{fig:mm10_mapped_perfect}
+   \end{subfigure}  
+   \begin{subfigure}{.5\columnwidth}
+      \centering
+      \includegraphics[width=.9\textwidth,natwidth=100,natheight=100]{danRer7_perfect_mapped_1000000.pdf}
+      \caption{}
+      \label{fig:danRer7_mapped_perfect}
+   \end{subfigure}%
+   \begin{subfigure}{.5\columnwidth}
+      \centering
+      \includegraphics[width=.9\textwidth,natwidth=100,natheight=100]{ce10_perfect_mapped_1000000.pdf}
+      \caption{}
+      \label{fig:ce10_mapped_perfect}
+   \end{subfigure}
+   \caption{}
+   \label{fig:mapped_perfect_statistic}
 \end{figure}
 
 \section{Discussion}\label{discussion}
