@@ -1,10 +1,12 @@
+*.2bit
 *.fa.gz
 *.fa
 *.bam
-mm10
-ce10
-danRer7
-hg38
 *.Robject
 bwa*
 twoBitToFa
+*.amb
+*.ann
+*.bwt
+*.pac
+*.sa
