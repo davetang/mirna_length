@@ -2,7 +2,6 @@
 *.fa.gz
 *.fa
 *.bam
-*.Robject
 bwa*
 twoBitToFa
 *.amb
