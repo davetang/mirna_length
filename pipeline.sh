@@ -223,4 +223,6 @@ then
    convert -density 300 image/mm10_mapped_1000000.eps image/mm10_mapped_1000000.pdf
 fi
 
+echo Done
+
 exit
