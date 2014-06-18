@@ -148,77 +148,81 @@ for org in $human $mouse $celegans $zebrafish
 done
 
 #transition images
-if [ -f image/$celegans.eps ]
+if [ ! -f image/$celegans.pdf ]
 then
-   Rscript image/transition.R data/${celegans}_trans_mat.Robject
+   Rscript script/transition.R data/${celegans}_trans_mat.Robject
    convert image/$celegans.eps -trim +repage -density 300 image/$celegans.pdf
 fi
-if [ -f image/$zebrafish.eps ]
+if [ ! -f image/$zebrafish.pdf ]
 then
-   Rscript image/transition.R data/${zebrafish}_trans_mat.Robject
+   Rscript script/transition.R data/${zebrafish}_trans_mat.Robject
    convert image/$zebrafish.eps -trim +repage -density 300 image/$zebrafish.pdf
 fi
-if [ -f image/$human.eps ]
+if [ ! -f image/$human.pdf ]
 then
-   Rscript image/transition.R data/${human}_trans_mat.Robject
+   Rscript script/transition.R data/${human}_trans_mat.Robject
    convert image/$human.eps -trim +repage -density 300 image/$human.pdf
 fi
-if [ -f image/$human.eps ]
+if [ ! -f image/$human.pdf ]
 then
-   Rscript image/transition.R data/${mouse}_trans_mat.Robject
+   Rscript script/transition.R data/${mouse}_trans_mat.Robject
    convert image/$mouse.eps -trim +repage -density 300 image/$mouse.pdf
 fi
 
+R --no-save < script/mirna_length.R
+
 #miRNA lengths
-if [ -f image/celegans_mirbase_length.eps ]
+if [ ! -f image/celegans_mirbase_length.pdf ]
 then
    convert -density 300 image/celegans_mirbase_length.eps image/celegans_mirbase_length.pdf
 fi
-if [ -f image/mouse_mirbase_length.eps ]
+if [ ! -f image/mouse_mirbase_length.pdf ]
 then
    convert -density 300 image/mouse_mirbase_length.eps image/mouse_mirbase_length.pdf
 fi
-if [ -f image/human_mirbase_length.eps ]
+if [ ! -f image/human_mirbase_length.pdf ]
 then
    convert -density 300 image/human_mirbase_length.eps image/human_mirbase_length.pdf
 fi
-if [ -f image/zebrafish_mirbase_length.eps ]
+if [ ! -f image/zebrafish_mirbase_length.pdf ]
 then
    convert -density 300 image/zebrafish_mirbase_length.eps image/zebrafish_mirbase_length.pdf
 fi
 
+R --no-save < script/plot_mapping_result.R
+
 #perfectly mapped
-if [ -f image/ce10_perfect_mapped_1000000.eps ]
+if [ ! -f image/ce10_perfect_mapped_1000000.pdf ]
 then
    convert -density 300 image/ce10_perfect_mapped_1000000.eps image/ce10_perfect_mapped_1000000.pdf
 fi
-if [ -f image/danRer7_perfect_mapped_1000000.eps ]
+if [ ! -f image/danRer7_perfect_mapped_1000000.pdf ]
 then
    convert -density 300 image/danRer7_perfect_mapped_1000000.eps image/danRer7_perfect_mapped_1000000.pdf
 fi
-if [ -f image/hg38_perfect_mapped_1000000.eps ]
+if [ ! -f image/hg38_perfect_mapped_1000000.pdf ]
 then
    convert -density 300 image/hg38_perfect_mapped_1000000.eps image/hg38_perfect_mapped_1000000.pdf
 fi
-if [ -f image/mm10_perfect_mapped_1000000.eps ]
+if [ ! -f image/mm10_perfect_mapped_1000000.pdf ]
 then
    convert -density 300 image/mm10_perfect_mapped_1000000.eps image/mm10_perfect_mapped_1000000.pdf
 fi
 
 #mapped
-if [ -f image/ce10_mapped_1000000.eps ]
+if [ ! -f image/ce10_mapped_1000000.pdf ]
 then
    convert -density 300 image/ce10_mapped_1000000.eps image/ce10_mapped_1000000.pdf
 fi
-if [ -f image/danRer7_mapped_1000000.eps ]
+if [ ! -f image/danRer7_mapped_1000000.pdf ]
 then
    convert -density 300 image/danRer7_mapped_1000000.eps image/danRer7_mapped_1000000.pdf
 fi
-if [ -f image/hg38_mapped_1000000.eps ]
+if [ ! -f image/hg38_mapped_1000000.pdf ]
 then
    convert -density 300 image/hg38_mapped_1000000.eps image/hg38_mapped_1000000.pdf
 fi
-if [ -f image/mm10_mapped_1000000.eps ]
+if [ ! -f image/mm10_mapped_1000000.pdf ]
 then
    convert -density 300 image/mm10_mapped_1000000.eps image/mm10_mapped_1000000.pdf
 fi

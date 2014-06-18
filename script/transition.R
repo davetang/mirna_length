@@ -27,7 +27,7 @@ nucleotides <- c('A', 'C', 'G', 'T')
 #so we need to transpose our matrix
 mytransitionmatrix <- t(round(mytransitionmatrix,2))
 
-my_outfile <- my_object
+my_outfile <- basename(my_object)
 my_outfile <- gsub("_.*", '.eps', my_outfile, perl=T)
 my_outfile <- paste('image/', my_outfile, sep='', collapse='')
 
