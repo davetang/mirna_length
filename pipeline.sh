@@ -98,14 +98,14 @@ then
    bwa-0.7.9a/bwa index $celegans/$celegans.fa
 fi
 
-if [ ! -f hg38_init_prob.Robject ] || [ ! -f hg38_trans_mat.Robject ] || [ ! -f mm10_init_prob.Robject ] || [ ! -f mm10_trans_mat.Robject ] || [ ! -f ce10_init_prob.Robject ] || [ ! -f ce10_trans_mat.Robject ] || [ ! -f danRer7_init_prob.Robject ] || [ ! -f danRer7_trans_mat.Robject ]
+if [ ! -f data/hg38_init_prob.Robject ] || [ ! -f data/hg38_trans_mat.Robject ] || [ ! -f data/mm10_init_prob.Robject ] || [ ! -f data/mm10_trans_mat.Robject ] || [ ! -f data/ce10_init_prob.Robject ] || [ ! -f data/ce10_trans_mat.Robject ] || [ ! -f data/danRer7_init_prob.Robject ] || [ ! -f data/danRer7_trans_mat.Robject ]
 then
-   R --no-save < dinucleotide.R
+   R --no-save < script/dinucleotide.R
 fi
 
-if [ ! -f hg38_nuc_freq.Robject ] || [ ! -f ce10_nuc_freq.Robject ] || [ ! -f danRer7_nuc_freq.Robject ] || [ ! -f mm10_nuc_freq.Robject ]
+if [ ! -f data/hg38_nuc_freq.Robject ] || [ ! -f data/ce10_nuc_freq.Robject ] || [ ! -f data/danRer7_nuc_freq.Robject ] || [ ! -f data/mm10_nuc_freq.Robject ]
 then
-   R --no-save < genome_freq.R
+   R --no-save < script/genome_freq.R
 fi
 
 #generate random sequences
@@ -115,17 +115,17 @@ for org in $human $mouse $celegans $zebrafish
       if [ ! -f $org/my_random_seq_markov_${i}_${my_number}.fa ]
       then
          touch $org/my_random_seq_markov_${i}_${my_number}.fa
-         Rscript seq_by_markov_chain.R $i ${org}_trans_mat.Robject ${org}_init_prob.Robject $my_number $org
+         Rscript script/seq_by_markov_chain.R $i data/${org}_trans_mat.Robject data/${org}_init_prob.Robject $my_number $org
       fi
       if [ ! -f $org/my_random_seq_equal_${i}_${my_number}.fa ]
       then
          touch $org/my_random_seq_equal_${i}_${my_number}.fa
-         Rscript seq_by_equal.R $i $my_number $org
+         Rscript script/seq_by_equal.R $i $my_number $org
       fi
       if [ ! -f $org/my_random_seq_gen_freq_${i}_${my_number}.fa ]
       then
          touch $org/my_random_seq_gen_freq_${i}_${my_number}.fa
-         Rscript seq_by_gen_freq.R $i ${org}_nuc_freq.Robject $my_number $org
+         Rscript script/seq_by_gen_freq.R $i data/${org}_nuc_freq.Robject $my_number $org
       fi
    done
 done
@@ -150,22 +150,22 @@ done
 #transition images
 if [ -f image/$celegans.eps ]
 then
-   Rscript image/transition.R ${celegans}_trans_mat.Robject
+   Rscript image/transition.R data/${celegans}_trans_mat.Robject
    convert image/$celegans.eps -trim +repage -density 300 image/$celegans.pdf
 fi
 if [ -f image/$zebrafish.eps ]
 then
-   Rscript image/transition.R ${zebrafish}_trans_mat.Robject
+   Rscript image/transition.R data/${zebrafish}_trans_mat.Robject
    convert image/$zebrafish.eps -trim +repage -density 300 image/$zebrafish.pdf
 fi
 if [ -f image/$human.eps ]
 then
-   Rscript image/transition.R ${human}_trans_mat.Robject
+   Rscript image/transition.R data/${human}_trans_mat.Robject
    convert image/$human.eps -trim +repage -density 300 image/$human.pdf
 fi
 if [ -f image/$human.eps ]
 then
-   Rscript image/transition.R ${mouse}_trans_mat.Robject
+   Rscript image/transition.R data/${mouse}_trans_mat.Robject
    convert image/$mouse.eps -trim +repage -density 300 image/$mouse.pdf
 fi
 
