@@ -9,6 +9,10 @@ This work was inspired by an observation I made back in 2012 (http://davetang.or
 
 `git clone https://github.com/davetang/mirna_length.git`
 
+Or using ssh:
+
+`git clone git@github.com:davetang/mirna_length.git`
+
 ### Perform the entire analysis
 
 `pipeline.sh 1000000`
