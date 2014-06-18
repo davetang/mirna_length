@@ -28,14 +28,18 @@ for (org in my_org){
                               )
    count_perfect_melt <- melt(count_perfect, id.vars='length')
    #larger font
-   theme_set(theme_gray(base_size = 25))
+   theme_set(theme_gray(base_size = 20))
 
    my_outfile <- paste('image/', org, '_perfect_mapped_1000000.eps', sep='')
+
    p <- ggplot(count_perfect_melt, aes(x=length, y=value, fill=variable)) +
    geom_bar(position="dodge", stat="identity") +
    xlab('Length of random sequence') +
    ylab('Number of perfect matches') +
-   scale_y_continuous(trans = log2_trans(), labels=comma)
+   scale_y_continuous(trans = log2_trans(),
+                      labels=trans_format("log2", math_format(2^.x)),
+                      breaks=mapply(function(x) 2^x, seq(0,20,2)))
+
    ggsave(p, file=my_outfile)
 
    my_file <- paste(org, '/', 'equal_mapped_1000000.txt', sep='')
@@ -52,11 +56,15 @@ for (org in my_org){
    count_mapped_melt <- melt(count_mapped, id.vars='length')
 
    my_outfile <- paste('image/', org, '_mapped_1000000.eps', sep='')
+
    p <- ggplot(count_mapped_melt, aes(x=length, y=value, fill=variable)) +
    geom_bar(position="dodge", stat="identity") +
    xlab('Length of random sequence') +
    ylab('Number mapped') +
-   scale_y_continuous(trans = log2_trans(), labels=comma)
+   scale_y_continuous(trans = log2_trans(),
+                      labels=trans_format("log2", math_format(2^.x)),
+                      breaks=mapply(function(x) 2^x, seq(0,20,2)))
+
    ggsave(p, file=my_outfile)
 }
 
