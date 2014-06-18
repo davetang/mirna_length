@@ -31,8 +31,8 @@ colnames(mytransitionmatrix) <- nucleotides
 #colSums(alphabetFrequency(subseq(human_mirna,1,1))[,1:4])
 #probabilites of first bases
 myinitialprobs <- unname(colSums(alphabetFrequency(subseq(organism_mirna,1,1))[,1:4])*100/length(organism_mirna))
-save(myinitialprobs, file='hg38_init_prob.Robject')
-save(mytransitionmatrix, file='hg38_trans_mat.Robject')
+save(myinitialprobs, file='data/hg38_init_prob.Robject')
+save(mytransitionmatrix, file='data/hg38_trans_mat.Robject')
 
 #mouse miRNAs
 organism <- 'Mus musculus'
@@ -47,8 +47,8 @@ colnames(mytransitionmatrix) <- nucleotides
 #colSums(alphabetFrequency(subseq(human_mirna,1,1))[,1:4])
 #probabilites of first bases
 myinitialprobs <- unname(colSums(alphabetFrequency(subseq(organism_mirna,1,1))[,1:4])*100/length(organism_mirna))
-save(myinitialprobs, file='mm10_init_prob.Robject')
-save(mytransitionmatrix, file='mm10_trans_mat.Robject')
+save(myinitialprobs, file='data/mm10_init_prob.Robject')
+save(mytransitionmatrix, file='data/mm10_trans_mat.Robject')
 
 #celegans miRNAs
 organism <- 'Caenorhabditis elegans'
@@ -63,8 +63,8 @@ colnames(mytransitionmatrix) <- nucleotides
 #colSums(alphabetFrequency(subseq(human_mirna,1,1))[,1:4])
 #probabilites of first bases
 myinitialprobs <- unname(colSums(alphabetFrequency(subseq(organism_mirna,1,1))[,1:4])*100/length(organism_mirna))
-save(myinitialprobs, file='ce10_init_prob.Robject')
-save(mytransitionmatrix, file='ce10_trans_mat.Robject')
+save(myinitialprobs, file='data/ce10_init_prob.Robject')
+save(mytransitionmatrix, file='data/ce10_trans_mat.Robject')
 
 #zebrafish
 organism <- 'Danio rerio'
@@ -79,5 +79,5 @@ colnames(mytransitionmatrix) <- nucleotides
 #colSums(alphabetFrequency(subseq(human_mirna,1,1))[,1:4])
 #probabilites of first bases
 myinitialprobs <- unname(colSums(alphabetFrequency(subseq(organism_mirna,1,1))[,1:4])*100/length(organism_mirna))
-save(myinitialprobs, file='danRer7_init_prob.Robject')
-save(mytransitionmatrix, file='danRer7_trans_mat.Robject')
+save(myinitialprobs, file='data/danRer7_init_prob.Robject')
+save(mytransitionmatrix, file='data/danRer7_trans_mat.Robject')
