@@ -1,0 +1,61 @@
+22mer/my_random_seq_equal_22_1000000_a_sorted.bam
+Exon 4.15
+Intron 53.01
+Intergenic 42.83
+22mer/my_random_seq_equal_22_1000000_b_sorted.bam
+Exon 4.17
+Intron 52.97
+Intergenic 42.86
+22mer/my_random_seq_equal_22_1000000_c_sorted.bam
+Exon 4.21
+Intron 53.12
+Intergenic 42.67
+22mer/my_random_seq_equal_22_1000000_d_sorted.bam
+Exon 4.15
+Intron 53.22
+Intergenic 42.63
+22mer/my_random_seq_equal_22_1000000_e_sorted.bam
+Exon 4.11
+Intron 53.20
+Intergenic 42.69
+22mer/my_random_seq_gen_freq_22_1000000_a_sorted.bam
+Exon 3.59
+Intron 51.97
+Intergenic 44.43
+22mer/my_random_seq_gen_freq_22_1000000_b_sorted.bam
+Exon 3.57
+Intron 52.06
+Intergenic 44.36
+22mer/my_random_seq_gen_freq_22_1000000_c_sorted.bam
+Exon 3.60
+Intron 52.04
+Intergenic 44.36
+22mer/my_random_seq_gen_freq_22_1000000_d_sorted.bam
+Exon 3.57
+Intron 51.96
+Intergenic 44.47
+22mer/my_random_seq_gen_freq_22_1000000_e_sorted.bam
+Exon 3.61
+Intron 51.96
+Intergenic 44.43
+22mer/my_random_seq_markov_22_1000000_a_sorted.bam
+Exon 4.45
+Intron 53.89
+Intergenic 41.66
+22mer/my_random_seq_markov_22_1000000_b_sorted.bam
+Exon 4.50
+Intron 53.80
+Intergenic 41.69
+22mer/my_random_seq_markov_22_1000000_c_sorted.bam
+Exon 4.48
+Intron 53.91
+Intergenic 41.62
+22mer/my_random_seq_markov_22_1000000_d_sorted.bam
+Exon 4.51
+Intron 53.77
+Intergenic 41.72
+22mer/my_random_seq_markov_22_1000000_e_sorted.bam
+Exon 4.45
+Intron 53.83
+Intergenic 41.72
+Done

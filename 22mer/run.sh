@@ -37,10 +37,8 @@ for i in a b c d e
    fi
 done
 
-exit
-
 #align random sequences
-do for file in `ls my_random*.fa`;
+for file in `ls my_random*.fa`;
    do base=`basename $file .fa`
    ../bwa-0.7.9a/bwa aln -t 12 ../$org/$org.fa $file > $base.sai
    ../bwa-0.7.9a/bwa samse ../$org/$org.fa $base.sai $file > $base.sam
