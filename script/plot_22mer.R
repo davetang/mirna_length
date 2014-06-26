@@ -13,7 +13,7 @@ sem <- function(x){
 library(ggplot2)
 
 #larger font
-theme_set(theme_gray(base_size = 20))
+theme_set(theme_gray(base_size = 30))
 
 for (i in c('exon', 'intron', 'intergenic')){
    my_mean <- aggregate(subset(df, select=colnames(df)==i), by=list(type), mean)
@@ -26,7 +26,8 @@ for (i in c('exon', 'intron', 'intergenic')){
      geom_bar(stat='identity') +
      geom_errorbar(aes(ymin=mean-sem, ymax=mean+sem),
                    width=.2) +
-     ylab('Percent mapped')
+     ylab('Percent mapped') +
+     xlab(i)
    ggsave(p, file=my_outfile)
 }
 
