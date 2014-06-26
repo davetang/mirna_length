@@ -233,6 +233,12 @@ then
    convert -density 300 image/mm10_mapped_1000000.eps image/mm10_mapped_1000000.pdf
 fi
 
+#plot 22mers
+R --no-save < script/plot_22mer.R
+convert -density 300 image/22mer_exon.eps image/22mer_exon.pdf
+convert -density 300 image/22mer_intergenic.eps image/22mer_intergenic.pdf
+convert -density 300 image/22mer_intron.eps image/22mer_intron.pdf
+
 echo Done
 
 exit
